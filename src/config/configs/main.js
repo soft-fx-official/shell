@@ -1,5 +1,5 @@
 module.exports = {
-  appName: 'mainShell', // NOTE: can't name main
+  appName: 'shell', // NOTE: can't name main
   exposes: {
     './main': './src/main',
   },

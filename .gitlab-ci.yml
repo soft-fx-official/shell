@@ -3,8 +3,6 @@ variables:
 
 stages:
   - "build.source"
-  - "build.doc"
-  - "apply.cors"
 
 build:
   image: registry.soft-fx.lv/org/nodejs/node:18.5.0-alpine3.16-build
@@ -28,35 +26,3 @@ build:
       --no-mime-magic
       --guess-mime-type
       sync ./build/ s3://${CI_PROJECT_NAME}/${CI_COMMIT_REF_NAME}/
-
-docs:
-  image: registry.soft-fx.lv/org/mkdocs:v1.3.1-build
-  stage: "build.doc"
-  script:
-    - mkdocs build --clean
-    - s3cmd
-      --host=${AWS_S3_HOST}
-      --host-bucket=${CI_PROJECT_NAME}.${AWS_S3_HOST}
-      --signature-v2
-      --progress
-      --no-preserve
-      --recursive
-      --force
-      --acl-public
-      --no-check-certificate
-      --delete-removed
-      --no-mime-magic
-      --guess-mime-type
-      sync ./build/docs/ s3://${CI_PROJECT_NAME}/${CI_COMMIT_REF_NAME}/docs/
-
-cors:
-  image: registry.soft-fx.lv/org/s3tools/s3cmd:2.2.0
-  stage: "apply.cors"
-  script:
-    - s3cmd
-      --host=${AWS_S3_HOST}
-      --host-bucket=${CI_PROJECT_NAME}.${AWS_S3_HOST}
-      --progress
-      --force
-      --no-check-certificate
-      setcors corsrules.xml s3://${CI_PROJECT_NAME}

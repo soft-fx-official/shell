@@ -1,3 +1,0 @@
-=================
-Main shell for onboarding
-=================

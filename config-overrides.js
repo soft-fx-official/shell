@@ -8,7 +8,6 @@ module.exports = {
   webpack: function (webpackConfig, env) {
     webpackConfig.output.publicPath = 'auto'
     webpackConfig.output.uniqueName = config.appName
-    webpackConfig.output.filename = 'main.js'
 
     webpackConfig.plugins = [
       ...webpackConfig.plugins,
@@ -19,7 +18,7 @@ module.exports = {
         remotes: config.remotes,
         shared: {
           ...dependencies,
-          react: {
+          'react': {
             singleton: true,
             requiredVersion: dependencies['react'],
           },
