@@ -1,0 +1,25 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-prettier"
+  ],
+  "rules": {
+    "alpha-value-notation": "number",
+    "color-function-notation": "legacy",
+    "comment-empty-line-before": null,
+    "indentation": 2,
+    "max-empty-lines": 1,
+    "property-no-vendor-prefix": null,
+    "selector-class-pattern": "[A-z]+",
+    "value-keyword-case": null,
+    "value-no-vendor-prefix": null,
+    "no-descending-specificity": null,
+    "block-no-empty": null,
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["global"]
+      }
+    ]
+  }
+}
