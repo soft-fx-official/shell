@@ -1,6 +1,6 @@
 import React from 'react'
 import { animated, useTransition } from 'react-spring'
-import { initApp, TinitApp } from 'common/inits'
+import { Iconfig, initApp, TinitApp } from 'common/inits'
 import { IBus } from 'common/tools'
 
 import { useMediaQuery } from '@mui/material'
@@ -12,7 +12,7 @@ import Page from './Page'
 
 interface ICreateMainArgs {
   App: React.FC
-  config: any
+  config: Iconfig
   initCurrentApp: TinitApp
   State: any
   defaultStateParams: any
@@ -73,7 +73,7 @@ function createMain(args: ICreateMainArgs): React.FC<MainProps> {
 
           const context = initContext({ ...args, isPrefersDarkMode, bus })
 
-          await initApp({ ...context, isRootApp: !bus }, initCurrentApp)
+          await initApp({ ...context, isRootApp: !bus, config }, initCurrentApp)
 
           setComponent(
             <Context.Provider value={context}>
