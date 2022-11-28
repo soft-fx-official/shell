@@ -3,6 +3,7 @@ variables:
 
 stages:
   - "build.source"
+  - "apply.cors"
 
 build:
   image: registry.soft-fx.lv/org/nodejs/node:18.5.0-alpine3.16-build
@@ -26,3 +27,16 @@ build:
       --no-mime-magic
       --guess-mime-type
       sync ./build/ s3://${CI_PROJECT_NAME}/${CI_COMMIT_REF_NAME}/
+
+cors:
+  image: registry.soft-fx.lv/org/s3tools/s3cmd:2.2.0
+  stage: "apply.cors"
+  script:
+    - s3cmd
+      --host=${AWS_S3_HOST}
+      --host-bucket=${CI_PROJECT_NAME}.${AWS_S3_HOST}
+      --progress
+      --force
+      --no-check-certificate
+      setcors corsrules.xml s3://${CI_PROJECT_NAME}
+
