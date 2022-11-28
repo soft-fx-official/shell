@@ -18,7 +18,7 @@ module.exports = {
         remotes: config.remotes,
         shared: {
           ...dependencies,
-          'react': {
+          react: {
             singleton: true,
             requiredVersion: dependencies['react'],
           },
@@ -42,7 +42,7 @@ module.exports = {
             options: {
               name: config.appName,
               exposes: config.exposes,
-              typesOutputDir: path.resolve(__dirname, `./w5mf-types-local`),
+              typesOutputDir: path.resolve(__dirname, `./w5mf-types`),
             },
           },
         ],
