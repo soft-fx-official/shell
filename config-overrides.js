@@ -42,7 +42,7 @@ module.exports = {
             options: {
               name: config.appName,
               exposes: config.exposes,
-              typesOutputDir: path.resolve(__dirname, './w5mf-types'),
+              typesOutputDir: path.resolve(__dirname, `./w5mf-types-local`),
             },
           },
         ],
