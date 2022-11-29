@@ -1,22 +1,11 @@
 import React from 'react';
-interface Error {
-    message: string;
-    ref: {
-        name: string;
-    };
-    type: string;
-    types: {
-        type: string;
-    };
-}
+import { FieldErrors, FieldValues } from 'react-hook-form';
 interface MobileErrorTooltipProps {
-    formErrors?: {
-        [key: string]: Error;
-    };
+    formErrors: FieldErrors<FieldValues>;
     fieldNames?: {
         [key: string]: string;
     };
     message?: string;
 }
-export declare const MobileErrorTooltip: React.FC<MobileErrorTooltipProps>;
-export {};
+declare const MobileErrorTooltip: React.FC<MobileErrorTooltipProps>;
+export { MobileErrorTooltip };
