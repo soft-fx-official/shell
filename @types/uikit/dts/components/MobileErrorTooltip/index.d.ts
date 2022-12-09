@@ -6,6 +6,7 @@ interface MobileErrorTooltipProps {
         [key: string]: string;
     };
     message?: string;
+    marginTop?: string;
 }
 declare const MobileErrorTooltip: React.FC<MobileErrorTooltipProps>;
 export { MobileErrorTooltip };
