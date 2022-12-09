@@ -20,7 +20,7 @@
     "strictNullChecks": true,
     "baseUrl": ".",
     "paths": {
-      "*": ["w5mf-types/*", "*"]
+      "*": ["@types/*", "*"]
     }
   },
   "include": ["src"]

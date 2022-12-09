@@ -10,7 +10,7 @@ build:
   stage: "build.source"
   script:
     - npm install
-    - node bin/configuration.js --branch=${CI_COMMIT_REF_NAME}
+    - node ./node_modules/fxo-configuration/src/index.js --branch=${CI_COMMIT_REF_NAME}
     - npm run lint:fix
     - REACT_APP_BRANCH=${CI_COMMIT_REF_NAME} npm run build
     - s3cmd
@@ -39,4 +39,3 @@ cors:
       --force
       --no-check-certificate
       setcors corsrules.xml s3://${CI_PROJECT_NAME}
-
