@@ -6,6 +6,7 @@ declare type CustomTooltipProps = Pick<TooltipProps, 'children' | 'title' | 'ope
     arrowBottomOffset?: number;
     fallbackPlacements?: ('bottom-end' | 'bottom-start' | 'bottom')[];
     onClose?: () => void;
+    marginTopWhenBottom?: string;
 };
 declare const CustomTooltip: React.FC<CustomTooltipProps>;
 export { CustomTooltip };
