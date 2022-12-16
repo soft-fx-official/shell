@@ -16,7 +16,7 @@ interface IMainParams {
     isLoader: boolean;
     isAnimate: boolean;
     onLoad: () => void;
-    onError: (error: any) => void;
+    onError: (message?: string) => void;
     onDone: () => void;
 }
 declare type MainProps = {

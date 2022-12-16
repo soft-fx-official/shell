@@ -23,7 +23,7 @@ interface IMainParams {
   isLoader: boolean
   isAnimate: boolean
   onLoad: () => void
-  onError: (error: any) => void
+  onError: (message?: string) => void
   onDone: () => void
 }
 
@@ -41,7 +41,7 @@ function createMain(args: ICreateMainArgs): React.FC<MainProps> {
         isLoader: true,
         isAnimate: true,
         onLoad: () => null,
-        onError: (error: any) => null,
+        onError: () => null,
         onDone: () => null,
       },
       ...params,
@@ -61,9 +61,9 @@ function createMain(args: ICreateMainArgs): React.FC<MainProps> {
     const isPrefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
 
     const setError = (error: Error | string | unknown) => {
-      console.info('[MAIN][ERROR]: ', error)
+      console.info(`[${config.appName.toLocaleUpperCase()}][MAIN][ERROR]: `, error)
+      onError()
       setComponent(<Error error={error} />)
-      onError(error)
     }
 
     React.useEffect(() => {
