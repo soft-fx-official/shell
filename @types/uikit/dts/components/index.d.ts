@@ -9,5 +9,6 @@ export type { IFailed } from './Failed';
 export { Failed } from './Failed';
 export type { ILoader } from './Loader';
 export { Loader } from './Loader';
+export { MobileErrorTooltip } from './MobileErrorTooltip';
 export { ThemeSwitch } from './ThemeSwitch';
 export { Upload } from './Upload';

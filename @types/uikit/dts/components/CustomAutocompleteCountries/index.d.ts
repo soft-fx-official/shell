@@ -4,5 +4,6 @@ export interface CustomAutocompleteCountriesProps<T> extends Omit<AutocompletePr
     errorMessage?: string;
     label?: string;
     placeholder?: string;
+    showTooltip?: boolean;
 }
 export declare const CustomAutocompleteCountries: React.FC<CustomAutocompleteCountriesProps<any[]>>;
