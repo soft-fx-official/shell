@@ -1,6 +1,7 @@
 import React from 'react'
 import { animated, useTransition } from 'react-spring'
 import { useThemeModeTransition } from 'common/hooks'
+import { Iconfig } from 'common/inits'
 import { observer } from 'mobx-react-lite'
 import { Loader } from 'uikit/components'
 import { initTheme } from 'uikit/themes'
@@ -12,7 +13,7 @@ import styles from './index.module.css'
 
 interface PageProps {
   App: React.FC
-  config: any
+  config: Iconfig
 }
 
 const Page = ({ App, config }: PageProps) => {

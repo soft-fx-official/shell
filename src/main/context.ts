@@ -1,11 +1,9 @@
 import React from 'react'
 import {
   IInitApiR,
-  IInitApp,
   IInitStateR,
   IInitStorageR,
   initApi,
-  initApp,
   initLocale,
   initState,
   initStorage,
@@ -13,7 +11,6 @@ import {
 import { Bus, IBus } from 'common/tools'
 import { i18n } from 'i18next'
 import { initTheme, Theme } from 'uikit/themes'
-import { setLocale } from 'yup'
 
 import { ICreateMainArgs } from './index'
 
@@ -34,21 +31,22 @@ const useContext: TuseContext = () => React.useContext(Context)
 
 type TinitContextData = {
   isPrefersDarkMode?: boolean
-} & Omit<ICreateMainArgs, 'App'>
+  bus: IBus | null
+} & Omit<ICreateMainArgs, 'App' | 'initCurrentApp'>
 
-async function initContext(bus: IBus | null, data: TinitContextData) {
+function initContext(data: TinitContextData) {
   const {
+    bus: receivedTire,
     config,
-    initCurrentApp,
     State,
     defaultStateParams,
     translationResources,
     isPrefersDarkMode,
   } = data
 
-  const isRootApp = !bus
+  const isRootApp = !receivedTire
 
-  const currentBus = !isRootApp ? bus : new Bus()
+  const bus = isRootApp ? new Bus() : receivedTire
 
   const storage = initStorage(config.appName)
 
@@ -59,37 +57,13 @@ async function initContext(bus: IBus | null, data: TinitContextData) {
     },
   })
 
-  setLocale({
-    mixed: {
-      default: () => i18next.t('form.validate.invalide'),
-      required: () => i18next.t('form.validate.required'),
-    },
-    string: {
-      email: () => i18next.t('form.validate.email'),
-      min: ({ min }) => i18next.t('form.validate.string.min', { min }),
-      max: ({ max }) => i18next.t('form.validate.string.max', { max }),
-    },
-    number: {
-      min: ({ min }) => i18next.t('form.validate.number.min', { min }),
-      max: ({ max }) => i18next.t('form.validate.number.max', { max }),
-    },
-  })
-
-  const api = initApi(config.api, storage, currentBus)
+  const api = initApi(config.api, storage, bus)
 
   const state = initState(storage, new State(defaultStateParams), isPrefersDarkMode)
 
-  const theme = !isRootApp ? null : initTheme(config.theme, {})
+  const theme = isRootApp ? initTheme(config.theme, {}) : null
 
-  const context = { storage, i18next, api, state, theme, bus: currentBus }
-
-  if (isRootApp) {
-    window.addEventListener('hashchange', () => {
-      currentBus?.say('routing', { route: window.location.hash })
-    })
-  }
-
-  await initApp({ storage, i18next, state, bus: currentBus, api }, initCurrentApp)
+  const context = { storage, i18next, api, state, theme, bus }
 
   return context
 }
