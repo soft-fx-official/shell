@@ -1,4 +1,3 @@
-/// <reference types="react" />
 interface IThemeSwitch {
     isDarkTheme: boolean;
     onChange: () => void;
