@@ -1,6 +1,7 @@
 const path = require('path')
 const { ModuleFederationPlugin } = require('webpack').container
 const W5MFTypesGeneratePlugin = require('w5mf-types-generate')
+const { getUpdateRemotes } = require('w5mf-types-tools')
 const { dependencies } = require('./package.json')
 const config = require('./src/config')
 
@@ -15,7 +16,7 @@ module.exports = {
         name: config.appName,
         filename: 'remoteEntry.js',
         exposes: config.exposes,
-        remotes: config.remotes,
+        remotes: getUpdateRemotes(config.remotes),
         shared: {
           ...dependencies,
           react: {

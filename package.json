@@ -64,6 +64,7 @@
     "typescript": "4.7.3",
     "w5mf-types-generate": "0.2.x",
     "w5mf-types-remote": "0.2.x",
+    "w5mf-types-tools": "0.1.x",
     "yup": "0.32.11"
   },
   "devDependencies": {
